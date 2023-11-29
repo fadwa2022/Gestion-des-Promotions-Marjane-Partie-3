@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "api/v1/admin")
+@CrossOrigin(origins = "*")
 public class AdminResource {
     private final AdminManagerApplication adminService;
     @Autowired
