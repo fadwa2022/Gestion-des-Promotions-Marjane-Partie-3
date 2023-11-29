@@ -16,6 +16,7 @@ public class AdminResource {
     private final AdminManagerApplication adminService;
     @Autowired
     public AdminResource(AdminManagerApplication adminService) {
+
         this.adminService = adminService;
     }
     @GetMapping
@@ -24,6 +25,7 @@ public class AdminResource {
 }
     @PostMapping
     public void  registerNewAdmin(@RequestBody AdminRequest admin){
+
         adminService.addNewAdmin(admin.toModel());
     }
     @GetMapping(path = "{adminemail}")

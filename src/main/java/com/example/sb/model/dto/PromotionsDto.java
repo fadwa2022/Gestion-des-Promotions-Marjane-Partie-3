@@ -4,6 +4,7 @@ import com.example.sb.model.Ennum.Statut;
 import com.example.sb.model.Entities.Categories;
 import com.example.sb.model.Entities.Produits;
 import com.example.sb.model.Entities.Responsable;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,8 @@ public class PromotionsDto {
     private Produits produit;
 
     @NotNull(message = "Promotion date cannot be null")
+    @JsonFormat(pattern = "yyyy-MM-d")
+
     private LocalDate datepromo;
 
     @NotNull(message = "Statut cannot be null")

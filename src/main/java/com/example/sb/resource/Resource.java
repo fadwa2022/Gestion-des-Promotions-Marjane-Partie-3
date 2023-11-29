@@ -21,6 +21,7 @@ public abstract class Resource<Dto,DtoRequest,Identifier> {
     }
     @GetMapping
     public List<Dto> getAll() {
+
         return service.getAll();
     }
     @GetMapping("/{id}")

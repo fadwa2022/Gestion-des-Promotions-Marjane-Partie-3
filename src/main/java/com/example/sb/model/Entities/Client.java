@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.List;
-
 @Getter
 @Builder
 @Setter
@@ -14,11 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table
-public class Centre {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String email;
+    private String password;
+    private Integer numerocartefideliter;
 
-
+    @ManyToOne
+    @JoinColumn(name = "id_agentCaisse")
+    private AgentCaisse agentCaisse;
 }

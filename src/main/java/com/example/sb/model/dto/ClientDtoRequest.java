@@ -2,9 +2,8 @@ package com.example.sb.model.dto;
 
 import com.example.sb.helpers.AuthenticationHelpers;
 import com.example.sb.model.Entities.Admin;
-import com.example.sb.model.Entities.Centre;
-import com.example.sb.model.Entities.Rayon;
-import com.example.sb.model.Entities.Responsable;
+import com.example.sb.model.Entities.AgentCaisse;
+import com.example.sb.model.Entities.Client;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -17,36 +16,29 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ResponsableRequest {
+public class ClientDtoRequest {
     @Email(message = "Email was not provided")
     @NotEmpty(message = "email must be present")
     @Column(unique = true)
     private String email;
     private String password;
-
-    private Long admin_id;
-
-    private Long rayon_id;
-    public Responsable toModel(){
-        Admin admin1 = Admin
+    private Integer numerocartefideliter;
+    private Long agentCaisse_id;
+    public Client toModel(){
+        AgentCaisse agentCaisse = AgentCaisse
                 .builder()
-                .id(admin_id)
+                .id(agentCaisse_id)
                 .build();
-        Rayon rayon1 = Rayon
-                .builder()
-                .id(rayon_id)
-                .build();
-        return Responsable.
+        return Client.
                 builder()
                 .email(this.email)
+                .numerocartefideliter(this.numerocartefideliter)
+
                 .password(
                         AuthenticationHelpers.hashPassword(
-                            this.password
-                        )
-                )
-                .admin(admin1)
-                .rayon(rayon1)
+                                this.password
+                        ))
+                .agentCaisse(agentCaisse)
                 .build();
     }
-
 }

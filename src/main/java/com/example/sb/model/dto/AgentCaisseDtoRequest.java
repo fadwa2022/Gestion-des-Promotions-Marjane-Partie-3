@@ -2,9 +2,8 @@ package com.example.sb.model.dto;
 
 import com.example.sb.helpers.AuthenticationHelpers;
 import com.example.sb.model.Entities.Admin;
+import com.example.sb.model.Entities.AgentCaisse;
 import com.example.sb.model.Entities.Centre;
-import com.example.sb.model.Entities.Rayon;
-import com.example.sb.model.Entities.Responsable;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
@@ -17,36 +16,27 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ResponsableRequest {
+public class AgentCaisseDtoRequest {
     @Email(message = "Email was not provided")
     @NotEmpty(message = "email must be present")
     @Column(unique = true)
     private String email;
     private String password;
+    private long admin_id;
 
-    private Long admin_id;
-
-    private Long rayon_id;
-    public Responsable toModel(){
+    public AgentCaisse toModel(){
         Admin admin1 = Admin
                 .builder()
                 .id(admin_id)
                 .build();
-        Rayon rayon1 = Rayon
-                .builder()
-                .id(rayon_id)
-                .build();
-        return Responsable.
+        return AgentCaisse.
                 builder()
                 .email(this.email)
                 .password(
                         AuthenticationHelpers.hashPassword(
-                            this.password
-                        )
-                )
+                        this.password
+                ))
                 .admin(admin1)
-                .rayon(rayon1)
                 .build();
     }
-
 }

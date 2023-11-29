@@ -13,6 +13,7 @@ public class CentreMapper implements Mapper<Centre, CentreDto> {
     private final ModelMapper modelMapper;
 
     public CentreMapper(ModelMapper modelMapper) {
+
         this.modelMapper = modelMapper;
     }
 

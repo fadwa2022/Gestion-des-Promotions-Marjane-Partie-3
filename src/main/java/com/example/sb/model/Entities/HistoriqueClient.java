@@ -1,10 +1,9 @@
 package com.example.sb.model.Entities;
 
+import com.example.sb.model.Ennum.Statut;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.relational.core.mapping.Table;
-
-import java.util.List;
 
 @Getter
 @Builder
@@ -14,11 +13,15 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table
-public class Centre {
+public class HistoriqueClient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-
-
+    @ManyToOne
+    @JoinColumn(name = "id_produits")
+    private Produits produits;
+    private Statut statutpromotion;
+    @ManyToOne
+    @JoinColumn(name = "id_client")
+    private Client client;
 }

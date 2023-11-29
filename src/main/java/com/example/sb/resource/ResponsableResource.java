@@ -5,11 +5,13 @@ import com.example.sb.model.dto.ResponsableRequest;
 import com.example.sb.service.Impl.ResponsableManagerApplicationImpl;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "api/responsables")
 public class ResponsableResource extends Resource<ResponsableDto,ResponsableRequest,Long>{
     @Autowired

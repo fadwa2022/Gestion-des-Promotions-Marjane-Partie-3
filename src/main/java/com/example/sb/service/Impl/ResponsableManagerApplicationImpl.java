@@ -1,10 +1,11 @@
 package com.example.sb.service.Impl;
-import com.example.sb.model.Entities.Admin;
 import com.example.sb.model.Entities.Responsable;
+import com.example.sb.model.dto.PromotionsDto;
 import com.example.sb.model.dto.ResponsableDto;
 import com.example.sb.model.dto.ResponsableRequest;
 import com.example.sb.model.mappers.Mapper;
 import com.example.sb.repo.ResponsableRepository;
+import com.example.sb.service.PromotionObserver;
 import com.example.sb.service.ResponsableManagerApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,20 +16,25 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class ResponsableManagerApplicationImpl implements ResponsableManagerApplication {
+public class ResponsableManagerApplicationImpl implements ResponsableManagerApplication , PromotionObserver {
     private final ResponsableRepository repository;
     private final Mapper<Responsable, ResponsableDto> responsablemapper;
+    private  final  PromotionObservable promotionObservable;
     @Autowired
     public ResponsableManagerApplicationImpl(
             ResponsableRepository repository,
-            @Qualifier("responsableMapper") Mapper<Responsable, ResponsableDto> responsablemapper) {
+            @Qualifier("responsableMapper") Mapper<Responsable, ResponsableDto> responsablemapper,
+            PromotionObservable promotionObservable
+         ) {
         this.repository = repository;
         this.responsablemapper = responsablemapper;
+        this.promotionObservable=promotionObservable;
+        this.promotionObservable.addObserver(this);
     }
     @Override
   public ResponsableDto save(ResponsableRequest responsableRequest) {
-        var ResponsableEntity =responsableRequest.toModel();
-        var createdResponsable = responsablemapper.mapTo(repository.save(ResponsableEntity));
+        var responsableEntity =responsableRequest.toModel();
+        var createdResponsable = responsablemapper.mapTo(repository.save(responsableEntity));
         return createdResponsable;
     }
 
@@ -87,4 +93,8 @@ public class ResponsableManagerApplicationImpl implements ResponsableManagerAppl
     }
 
 
+    @Override
+    public void update(PromotionsDto promotion) {
+        System.out.println("Notification au responsable : Une nouvelle promotion a été ajoutée - " + promotion.toString());
+    }
 }
