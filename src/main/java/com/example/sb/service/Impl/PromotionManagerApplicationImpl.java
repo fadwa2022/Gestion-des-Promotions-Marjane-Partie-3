@@ -5,9 +5,12 @@ package com.example.sb.service.Impl;
         import com.example.sb.model.dto.PromotionsDto;
         import com.example.sb.model.mappers.Mapper;
         import com.example.sb.repo.PromotionRepository;
+        import com.example.sb.service.PaginationService;
         import com.example.sb.service.PromotionManagerApplication;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.beans.factory.annotation.Qualifier;
+        import org.springframework.data.domain.Page;
+        import org.springframework.data.domain.PageRequest;
         import org.springframework.stereotype.Service;
 
         import java.util.ArrayList;
@@ -16,7 +19,7 @@ package com.example.sb.service.Impl;
         import java.util.stream.Collectors;
 
 @Service
-public class PromotionManagerApplicationImpl implements PromotionManagerApplication {
+public class PromotionManagerApplicationImpl implements PromotionManagerApplication, PaginationService<PromotionsDto,PromotionRequest,Long> {
     private final PromotionRepository repository;
     private final Mapper<Promotions, PromotionsDto> promotionmapper;
     private final PromotionObservable promotionObservable;
@@ -120,7 +123,12 @@ public class PromotionManagerApplicationImpl implements PromotionManagerApplicat
     }
 
 
+    @Override
+    public Page<PromotionsDto> getAllPages(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page,size);
+        Page<Promotions> promotions = repository.findAll(pageRequest);
+        return promotions
+                .map(this.promotionmapper::mapTo);
 
-
-
+    }
 }

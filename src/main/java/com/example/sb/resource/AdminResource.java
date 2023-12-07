@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/v1/admin")
+@RequestMapping(path = "admin")
+@CrossOrigin(origins = "*")
 public class AdminResource {
     private final AdminManagerApplication adminService;
     @Autowired

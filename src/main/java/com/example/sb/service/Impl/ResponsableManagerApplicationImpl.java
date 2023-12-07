@@ -9,6 +9,7 @@ import com.example.sb.service.PromotionObserver;
 import com.example.sb.service.ResponsableManagerApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -90,6 +91,11 @@ public class ResponsableManagerApplicationImpl implements ResponsableManagerAppl
     @Override
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    @Override
+    public Page<ResponsableDto> getAllPages(int page, int size) {
+        return null;
     }
 
 

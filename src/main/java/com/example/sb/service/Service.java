@@ -1,5 +1,7 @@
 package com.example.sb.service;
 
+import org.springframework.data.domain.Page;
+
 import java.util.List;
 public interface Service <Dto,DtoRequest,Identifier> {
     Dto save(final DtoRequest request);
@@ -10,4 +12,6 @@ public interface Service <Dto,DtoRequest,Identifier> {
     Dto partialUpdate(final Identifier identifier, final Dto dto);
     boolean isExist(final Identifier identifier);
     void deleteAll();
+
+    Page<Dto> getAllPages(int page, int size);
 }

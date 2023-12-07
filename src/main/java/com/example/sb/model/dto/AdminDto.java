@@ -17,6 +17,8 @@ public class AdminDto {
     @Email(message = "Email was not provided")
     @NotEmpty(message = "email must be present")
     @Column(unique = true)
+    private Long id;
     private String email;
+    private String password;
     private Centre centre;
 }

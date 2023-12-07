@@ -9,6 +9,7 @@ import com.example.sb.service.AgentCaisseManagerApplication;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -77,5 +78,10 @@ public class AgentCaisseManagerApplicationImpl implements AgentCaisseManagerAppl
     @Override
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    @Override
+    public Page<AgentCaisseDto> getAllPages(int page, int size) {
+        return null;
     }
 }

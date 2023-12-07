@@ -7,6 +7,7 @@ import com.example.sb.model.mappers.Mapper;
 import com.example.sb.repo.ClientRepository;
 import com.example.sb.service.ClientManagerApplication;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -85,6 +86,11 @@ public class ClientManagerApplicationImpl implements ClientManagerApplication {
     @Override
     public void deleteAll() {
         repository.deleteAll();
+    }
+
+    @Override
+    public Page<ClientDto> getAllPages(int page, int size) {
+        return null;
     }
 
 }
